@@ -1,0 +1,50 @@
+{
+    "test1": {
+        "curl": "curl -d \"zkAddress=127.0.0.1\" \"http://192.168.33.141:8888/admin/conf\"",
+        "expect_result": {"meta": {"code": 200}, "response": {"message": "admin conf successful!"}},
+		"check_function": "",
+        "init": ""
+    },
+    "test2": {
+        "curl": "curl -d \"adminUser=root&adminPassword=root\" \"http://192.168.33.141:8888/admin/user\"",
+        "expect_result": {"meta": {"code": 200}, "response": {"message": "creating admin user successful!"}},
+		"check_function": "",
+        "init": ""
+    },
+    "test3": {
+        "curl": "curl --user root:root -d \"clusterName=test_cluster&dataNodeIp=192.168.33.141&dataNodeName=test_cluster_node_1\" \"http://192.168.33.141:8888/serverCluster\" ",
+        "expect_result": {"notification": {"message": "direct"}, "meta": {"code": 417, "errorType": "user_visible_error", "errorDetail": "This machine has existed, no need to regedit!"}, "response": "This machine has been regedited!"},
+		"check_function": "",
+        "init": ""
+    },
+    "test4": {
+        "curl": "curl --user root:root -d \"clusterName=test_cluster&dataNodeIp=192.168.33.142&dataNodeName=test_cluster_node_2\" \"http://192.168.33.141:8888/serverCluster\" ",
+        "expect_result": {"notification": {"message": "direct"}, "meta": {"code": 417, "errorType": "user_visible_error", "errorDetail": "This machine has existed, no need to regedit!"}, "response": "This machine has been regedited!"},
+        "check_function": "",
+		"init": ""
+    },
+    "test5": {
+        "curl": "curl --user root:root -d \"clusterName=test_cluster&dataNodeIp=192.168.33.143&dataNodeName=test_cluster_node_3\" \"http://192.168.33.141:8888/serverCluster\" ",
+        "expect_result": {"notification": {"message": "direct"}, "meta": {"code": 417, "errorType": "user_visible_error", "errorDetail": "This machine has existed, no need to regedit!"}, "response": "This machine has been regedited!"},
+		"check_function": "",
+		"init": ""
+    },
+    "test6": {
+        "curl": "curl --user root:root -d \"clusterName=test_cluster&dataNodeIp=192.168.33.144&dataNodeName=test_cluster_node_4\" \"http://192.168.33.141:8888/serverCluster\" ",
+        "expect_result": {"notification": {"message": "direct"}, "meta": {"code": 417, "errorType": "user_visible_error", "errorDetail": "This machine has existed, no need to regedit!"}, "response": "This machine has been regedited!"},
+        "check_function": "",
+		"init": ""
+    },
+    "test7": {
+        "curl": "curl --user root:root -d \"containerClusterName=df\" http://192.168.33.141:8888/containerCluster ",
+        "expect_result": {"meta": {"code": 200}, "response": {"message": "due to create container cluster need a little more times, please wait to finished and email to you, when cluster have started!"}},
+        "check_function": "",
+		"init": ""
+    },
+    "test8": {
+        "curl": "curl --user root:root -X GET http://192.168.33.141:8888/containerCluster/createStatus/df",
+        "expect_result": "",
+        "check_function": "",
+		"init": ""
+    }
+}
